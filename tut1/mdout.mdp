@@ -2,7 +2,7 @@
 ;	File 'mdout.mdp' was generated
 ;	By user: gourav (1000)
 ;	On host: gourav
-;	At date: Tue Jul 27 00:57:48 2021
+;	At date: Tue Jul 27 01:17:24 2021
 ;
 ;	Created by:
 ;	                     :-) GROMACS - gmx grompp, 2021.2 (-:
@@ -11,7 +11,7 @@
 ;	Data prefix:  /usr/local/gromacs
 ;	Working dir:  /home/gourav/Projects/md_stuff/tutorial/tut1
 ;	Command line:
-;	  gmx grompp -f nvt.mdp -c em.gro -r em.gro -p topol.top -o nvt.tpr
+;	  gmx grompp -f npt.mdp -c nvt.gro -r nvt.gro -t nvt.cpt -p topol.top -o npt.tpr
 
 ; VARIOUS PREPROCESSING OPTIONS
 ; Preprocessor information: use cpp syntax.
@@ -141,15 +141,15 @@ tc-grps                  = Protein Non-Protein
 tau_t                    = 0.1     0.1
 ref_t                    = 300     300
 ; pressure coupling     
-pcoupl                   = no
-pcoupltype               = Isotropic
+pcoupl                   = Parrinello-Rahman
+pcoupltype               = isotropic
 nstpcouple               = -1
 ; Time constant (ps), compressibility (1/bar) and reference P (bar)
-tau-p                    = 1
-compressibility          = 
-ref-p                    = 
+tau_p                    = 2.0
+compressibility          = 4.5e-5
+ref_p                    = 1.0
 ; Scaling of reference coordinates, No, All or COM
-refcoord-scaling         = No
+refcoord_scaling         = com
 
 ; OPTIONS FOR QMMM calculations
 QMMM                     = no
@@ -167,16 +167,16 @@ annealing-time           =
 annealing-temp           = 
 
 ; GENERATE VELOCITIES FOR STARTUP RUN
-gen_vel                  = yes
-gen_temp                 = 300
-gen_seed                 = -1
+gen_vel                  = no
+gen-temp                 = 300
+gen-seed                 = -1
 
 ; OPTIONS FOR BONDS    
 constraints              = h-bonds
 ; Type of constraint algorithm
 constraint_algorithm     = lincs
 ; Do not constrain the start configuration
-continuation             = no
+continuation             = yes
 ; Use successive overrelaxation to reduce the number of shake iterations
 Shake-SOR                = no
 ; Relative tolerance of shake
